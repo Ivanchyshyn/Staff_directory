@@ -1,3 +1,4 @@
+dj-pagination==2.4.0
 Django==2.1.7
 django-seed==0.1.9
 Faker==1.0.5

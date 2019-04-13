@@ -7,9 +7,7 @@ class Home(ListView):
     model = Employee
     template_name = 'staff/index.html'
     context_object_name = 'staff'
-    paginate_by = 100
-    ordering = '-salary'
 
 
 class Staff(Home):
-    ordering = '-full_name'
+    template_name = 'staff/staff.html'

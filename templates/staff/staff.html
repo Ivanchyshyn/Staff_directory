@@ -1,0 +1,42 @@
+
+{% extends 'staff/base.html' %}
+{% load pagination_tags sorting_tags %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>{% block title %}Staff{% endblock %}</title>
+	{% block css %}
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+	{% endblock %}
+</head>
+<body>
+	{% block content %}
+	{% autosort staff as sorted_staff %}
+	{% autopaginate sorted_staff 100 as paginated_staff %}
+	<div>
+		<table>
+			<tr>
+				<th>{% anchor full_name "Name" %}</th>
+				<th>{% anchor job "Job" %}</th>
+				<th>{% anchor salary "Salary" %}</th>
+				<th>{% anchor boss "Boss" %}</th>
+				<th>{% anchor start_working_date "Started Working" %}</th>
+			</tr>
+			{% for employee in paginated_staff %}
+			<tr>
+				<td>{{ employee.full_name }}</td>
+				<td>{{ employee.job }}</td>
+				<td>{{ employee.salary }}</td>
+				<td>{{ employee.boss }}</td>
+				<td>{{ employee.start_working_date }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	{% paginate %}
+	{% endblock %}
+</body>
+</html>
