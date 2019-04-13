@@ -36,6 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #own
+    'staff',
+
+    #third party
+    'django_seed',
+    'webstack_django_sorting',
 ]
 
 MIDDLEWARE = [
