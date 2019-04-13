@@ -1,0 +1,68 @@
+
+{% extends 'staff/base.html' %}
+
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>{% block title %}Staff directory{% endblock %}</title>
+	{% block css %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	{% endblock %}
+</head>
+<body>
+	{% block content %}
+	<div>
+	{% if staff.exists %}
+	{% for employee in staff %}
+		<div>
+		<ul id="myUL">
+		  <li><span class="caret">{{ employee.full_name }}</span>
+		    <ul class="nested">
+		      <li><span class="caret">Посада - {{ employee.job }}</span>
+		        <ul class="nested">
+		          <li><span class="caret">Начальник - {{ employee.boss }}</span>
+		        	<ul class="nested">
+		          	  <li><span class="caret">Зарплата - {{ employee.salary }}</span>
+		            	<ul class="nested">
+		              	  <li>Дата прийняття на роботу - {{ employee.start_working_date }}</li>
+		            	</ul>
+		          	  </li>
+		          	</ul>
+		          </li>
+		        </ul>
+		      </li>
+		    </ul>
+		  </li>
+		</ul>
+		</div>
+	{% endfor %}
+	{% else %}
+		<strong>There are no staff present.</strong>
+	{% endif %}
+	</div>
+	{% if is_paginated %}
+	<div style='display: inline-block;' class="pagination">
+		<a href="/">First page</a>
+	</div>
+	<div style='display: inline-block;' class="pagination">
+	    {% if page_obj.has_previous %}
+	      <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+	    {% else %}
+	      <p class="disabled">Previous</p>
+	    {% endif %}
+	</div>
+	<div style="display: inline-block;" class="pagination">
+	    {% if page_obj.has_next %}
+	      <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+	    {% else %}
+	      <p class="disabled">Next</p>
+	    {% endif %}
+	  </div>
+	{% endif %}
+	<script src="{% static 'js/main.js' %}" ></script>
+	{% endblock %}
+</body>
+</html>
