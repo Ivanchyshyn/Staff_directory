@@ -14,6 +14,18 @@
 </head>
 <body>
 	{% block content %}
+	<div>
+	<div style="display: inline-block;">
+		<form type='get' action="." style="margin: 5px">
+			<input type="text" name="search_box" placeholder="Search...">
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+	<div style="display: inline-block;">
+		<a href="{% url 'staff:staff' %}">Весь каталог</a>	
+	</div>
+	</div>
+
 	{% autosort staff as sorted_staff %}
 	{% autopaginate sorted_staff 100 as paginated_staff %}
 	<div>
@@ -22,9 +34,21 @@
 				<th>{% anchor full_name "Name" %}</th>
 				<th>{% anchor job "Job" %}</th>
 				<th>{% anchor salary "Salary" %}</th>
-				<th>{% anchor boss "Boss" %}</th>
+				<th>{% anchor boss__full_name "Boss" %}</th>
 				<th>{% anchor start_working_date "Started Working" %}</th>
 			</tr>
+			{% if result %}
+			{% for employee in result %}
+			<tr>
+				<td>{{ employee.full_name }}</td>
+				<td>{{ employee.job }}</td>
+				<td>{{ employee.salary }}</td>
+				<td>{{ employee.boss }}</td>
+				<td>{{ employee.start_working_date }}</td>
+			</tr>
+			{% endfor %}
+
+			{% else %}
 			{% for employee in paginated_staff %}
 			<tr>
 				<td>{{ employee.full_name }}</td>
@@ -34,6 +58,7 @@
 				<td>{{ employee.start_working_date }}</td>
 			</tr>
 			{% endfor %}
+			{% endif %}
 		</table>
 	</div>
 	{% paginate %}

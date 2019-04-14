@@ -16,31 +16,41 @@
 <body>
 	{% block content %}
 	<div>
-	{% if staff.exists %}
-	{% autopaginate staff 100 as paginated_staff %}
-	{% for employee in paginated_staff %}
-		<div>
-		<ul id="myUL">
-		  <li><span class="caret">{{ employee.full_name }}</span>
-		    <ul class="nested">
-		      <li><span class="caret">Посада - {{ employee.job }}</span>
-		        <ul class="nested">
-		          <li><span class="caret">Начальник - {{ employee.boss }}</span>
-		        	<ul class="nested">
-		          	  <li><span class="caret">Зарплата - {{ employee.salary }}</span>
-		            	<ul class="nested">
-		              	  <li>Дата прийняття на роботу - {{ employee.start_working_date }}</li>
-		            	</ul>
-		          	  </li>
-		          	</ul>
-		          </li>
-		        </ul>
-		      </li>
-		    </ul>
-		  </li>
-		</ul>
-		</div>
-	{% endfor %}
+	{% if bosses.exists %}
+	{% autopaginate bosses 100 as paginated_bosses %}
+		{% for boss in paginated_bosses %}
+			<div>
+			<ul id="myUL">
+			  <li><span class="caret">Начальник - {{ boss.full_name }}</span>
+			  	{% if boss.employee_set.all.exists %}
+			  	<ul class="nested">
+			      <li>Підлеглі
+				  	{% for employee in boss.employee_set.all %}
+				    <ul>
+				      <li><span class="caret">{{ employee.full_name }}</span>
+				        <ul class="nested">
+				          <li><span class="caret">Посада - {{ employee.job }}</span>
+				        	<ul class="nested">
+				          	  <li><span class="caret">Зарплата - {{ employee.salary }}</span>
+				            	<ul class="nested">
+				              	  <li>Дата прийняття на роботу - {{ employee.start_working_date }}</li>
+				            	</ul>
+				          	  </li>
+				          	</ul>
+				          </li>
+				        </ul>
+				      </li>
+				    </ul>
+				    {% endfor %}
+				  </li>
+				</ul>
+				{% else %}
+				  <li><strong>Немає підлеглих</strong></li>
+				{% endif %}
+			  </li>
+			</ul>
+			</div>
+		{% endfor %}
 	{% else %}
 		<strong>There are no staff present.</strong>
 	{% endif %}
