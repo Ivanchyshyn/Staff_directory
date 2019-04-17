@@ -129,3 +129,4 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = reverse_lazy('staff:staff')
 LOGIN_URL = reverse_lazy('staff:login')
 LOGOUT_URL = reverse_lazy('staff:logout')
+LOGOUT_REDIRECT_URL = reverse_lazy('staff:home')

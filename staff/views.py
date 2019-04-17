@@ -2,6 +2,7 @@ from django.db.models import CharField, DecimalField, Q
 from django.views.generic import ListView, FormView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Boss, Employee
 from .forms import UserForm, UserProfileForm
@@ -12,7 +13,7 @@ class HomeView(ListView):
     context_object_name = 'bosses'
 
 
-class StaffView(ListView):
+class StaffView(LoginRequiredMixin, ListView):
     model = Employee
     template_name = 'staff/staff.html'
     context_object_name = 'staff'

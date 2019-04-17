@@ -7,6 +7,15 @@
     {% block css %}{% endblock %}
     </head>
     <body>
+    	<nav style="margin: 8px; font-size: 18px">
+    		{% if user.is_authenticated %}
+    			<a href="{% url 'staff:logout' %}">Logout</a>
+    		{% else %}
+    			<a href="{% url 'staff:login' %}">Login</a>
+    		{% endif %}
+    		<a href="{% url 'staff:home' %}">Hierarchy</a>
+    		<a href="{% url 'staff:staff' %}">Catalog</a>
+    	</nav>
     {% block content %}
     {% endblock %}
     </body>

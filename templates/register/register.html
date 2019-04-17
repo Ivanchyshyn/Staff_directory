@@ -2,7 +2,9 @@
 
 <html>
 <head>
+	{% load staticfiles %}
 	{% block title %}Register{% endblock %}
+	{% block css %} <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}"> {% endblock %}
 </head>
 {% block content %}
 <form method="POST" enctype="multipart/form-data"> {% csrf_token %}

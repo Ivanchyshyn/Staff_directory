@@ -1,0 +1,15 @@
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 110px;
+    text-align: left;
+    margin: 6px;
+}
+input {
+  display: inline-block;
+  float: left;
+}
+.helptext {
+	display: none
+}
