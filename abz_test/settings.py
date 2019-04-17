@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
+from django.urls import reverse_lazy
+
 from .settings_secret import *
 
 import os
@@ -123,3 +125,7 @@ STATIC_URL = '/static/'
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = reverse_lazy('staff:staff')
+LOGIN_URL = reverse_lazy('staff:login')
+LOGOUT_URL = reverse_lazy('staff:logout')
